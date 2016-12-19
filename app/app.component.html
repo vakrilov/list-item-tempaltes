@@ -1,33 +1,31 @@
 <GridLayout>
-    <ListView [items]="newsItems" class="list-group">
-        <template let-item="item">
-            <GridLayout>
+    <ListView [items]="newsItems" class="list-group" [itemTemplateSelector]="templateSelector">
+        <template nsTemplateKey="big" let-item="item">
+            <GridLayout class="list-group-item">
+                <Image [src]="item.imageUrl" stretch="aspectFit" height="200"></Image>
 
-                <GridLayout *ngIf="item.type === 'big'" class="list-group-item">
-                    <Image [src]="item.imageUrl" stretch="aspectFit" height="200"></Image>
-
-                    <Label [text]="item.title" class="big-header"></Label>
-                </GridLayout>
-
-
-                <GridLayout *ngIf="item.type === 'small' && item.imageUrl" columns="auto *" rows="30 auto" class="list-group-item">
-                    <Image [src]="item.imageUrl" stretch="aspectFill" row="0" col="0" rowSpan="2" width="80" height="80" class="thumb img-circle"></Image>
-
-                    <Label row="0" col="1" [text]="item.title" class="list-group-heading"></Label>
-                    <Label row="1" col="1" [text]="item.text" class="list-group-item-text" textWrap="true"></Label>
-                </GridLayout>
-
-
-                <StackLayout *ngIf="item.type === 'small' && !item.imageUrl" class="list-group-item">
-                    <Label row="0" col="1" [text]="item.title" class="list-group-heading"></Label>
-                    <Label row="1" col="1" [text]="item.text" class="list-group-item-text" textWrap="true"></Label>                    
-                </StackLayout>
-
+                <Label [text]="item.title" class="big-header"></Label>
             </GridLayout>
+        </template>
 
+        <template nsTemplateKey="small" let-item="item">
+            <GridLayout columns="auto *" rows="30 auto" class="list-group-item">
+                <Image [src]="item.imageUrl" stretch="aspectFill" row="0" col="0" rowSpan="2" width="80" height="80" class="thumb img-circle"></Image>
+
+                <Label row="0" col="1" [text]="item.title" class="list-group-heading"></Label>
+                <Label row="1" col="1" [text]="item.text" class="list-group-item-text" textWrap="true"></Label>
+            </GridLayout>
+        </template>
+
+        <template nsTemplateKey="small-no-image" let-item="item">
+            <StackLayout class="list-group-item">
+                <Label row="0" col="1" [text]="item.title" class="list-group-heading"></Label>
+                <Label row="1" col="1" [text]="item.text" class="list-group-item-text" textWrap="true"></Label>
+            </StackLayout>
         </template>
     </ListView>
 
-    <Button [text]="isProfiling ? 'stop profiling' : 'start profiling'" (tap)="toggleProfiling()" verticalAlignment="bottom" margin="0 20"></Button>
-    
+    <Button [text]="isProfiling ? 'stop profiling' : 'start profiling'" (tap)="toggleProfiling()" verticalAlignment="bottom"
+        margin="0 20"></Button>
+
 </GridLayout>

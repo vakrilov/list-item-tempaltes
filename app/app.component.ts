@@ -17,6 +17,15 @@ export class AppComponent implements OnInit {
         this.newsItems = this.service.getItems();
     }
 
+    public templateSelector = (item: NewsItem, index: number, items: any) => {
+        if (item.type === "big") {
+            return "big"
+        } else if (item.type === "small") {
+            return item.imageUrl ? "small" : "small-no-image";
+        }
+        throw new Error("Unrecognized template!")
+    }
+
     // Profiling code
     public isProfiling: boolean;
     toggleProfiling() {
