@@ -27,4 +27,7 @@
 
         </template>
     </ListView>
+
+    <Button [text]="isProfiling ? 'stop profiling' : 'start profiling'" (tap)="toggleProfiling()" verticalAlignment="bottom" margin="0 20"></Button>
+    
 </GridLayout>

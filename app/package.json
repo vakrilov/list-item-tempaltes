@@ -25,7 +25,8 @@
     },
     "homepage": "https://github.com/NativeScript/template-hello-world-ng",
     "android": {
-        "v8Flags": "--expose_gc"
+        "v8Flags": "--expose_gc",
+        "profilerOutputDir": "/sdcard/profiling"
     },
     "dependencies": {
         "nativescript-theme-core": "^0.2.1",
